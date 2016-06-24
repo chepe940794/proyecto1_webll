@@ -76,19 +76,46 @@ namespace IdentitySample.Controllers
 
             // This doen't count login failures towards lockout only two factor authentication
             // To enable password failures to trigger lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
 
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            // Require the user to have a confirmed email before they can log on.
+            var user = UserManager.Find(model.Email, model.Password);
+            if (user != null)
             {
-                var usr = db.Users.Where(u => u.Email == model.Email).FirstOrDefault();
-                if (!usr.EmailConfirmed)
+                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                 {
-                    ModelState.AddModelError("", "NO HA CONFIRMADO EL EMAIL.");
-                    return View(model);
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account-Resend");
+
+                    // Uncomment to debug locally  
+                    // ViewBag.Link = callbackUrl;
+                    ViewBag.errorMessage = "You must have a confirmed email to log on. "
+                                         + "The confirmation token has been resent to your email account.";
+                    return View("ConfirmEmail");
                 }
-                    
             }
-           
+
+            //var user = await UserManager.FindByNameAsync(model.Email);
+            //if (user != null)
+            //{
+            //    if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+            //    {
+            //        ViewBag.errorMessage = "You must have a confirmed email to log on.";
+            //        return View("Error");
+            //    }
+            //}
+
+            //using (ApplicationDbContext db = new ApplicationDbContext())
+            //{
+            //    var usr = db.Users.Where(u => u.Email == model.Email).FirstOrDefault();
+            //    if (!usr.EmailConfirmed)
+            //    {
+            //        ModelState.AddModelError("", "NO HA CONFIRMADO EL EMAIL.");
+            //        //return View(model);
+            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
+            //    }
+
+            //}
+
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
 
             switch (result)
             {
@@ -165,6 +192,26 @@ namespace IdentitySample.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            //if (ModelState.IsValid)
+            //{
+            //    var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            //    var result = await UserManager.CreateAsync(user, model.Password);
+            //    if (result.Succeeded)
+            //    {
+            //        //  Comment the following line to prevent log in until the user is confirmed.
+            //        //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+            //        string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
+
+
+            //        ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+            //                        + "before you can log in.";
+
+            //        return View("Info");
+            //        //return RedirectToAction("Index", "Home");
+            //    }
+            //    AddErrors(result);
+            //}
 
             if (ModelState.IsValid)
             {
@@ -190,6 +237,17 @@ namespace IdentitySample.Controllers
             return View(model);
         }
 
+        private async Task<string> SendEmailConfirmationTokenAsync(string userID, string subject)
+        {
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account",
+               new { userId = userID, code = code }, protocol: Request.Url.Scheme);
+            await UserManager.SendEmailAsync(userID, subject,
+               "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+            return callbackUrl;
+        }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -199,8 +257,11 @@ namespace IdentitySample.Controllers
             {
                 return View("Error");
             }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            
+                var result = await UserManager.ConfirmEmailAsync(userId, code);
+                return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            
+          
 
         }
 
