@@ -175,6 +175,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Migrations\201606242218261_initial.cs" />
     <Compile Include="Migrations\201606242218261_initial.Designer.cs">
       <DependentUpon>201606242218261_initial.cs</DependentUpon>
@@ -213,6 +214,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\login1.png" />
+    <Content Include="Images\registro.png" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\app\inspinia.js" />

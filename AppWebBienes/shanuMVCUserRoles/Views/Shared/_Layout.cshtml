@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>INSPINIA | @ViewBag.Title</title>
@@ -13,37 +13,37 @@
 {
     <body>
 
-    <!-- Wrapper-->
-    <div id="wrapper">
+        <!-- Wrapper-->
+        <div id="wrapper">
 
-        <!-- Navigation -->
-        @Html.Partial("_Navigation")
+            <!-- Navigation -->
+            @Html.Partial("_Navigation")
 
-        <!-- Page wraper -->
-        <div id="page-wrapper" class="gray-bg">
+            <!-- Page wraper -->
+            <div id="page-wrapper" class="gray-bg">
 
-            <!-- Top Navbar -->
-            @Html.Partial("_TopNavbar")
+                <!-- Top Navbar -->
+                @Html.Partial("_TopNavbar")
 
-            <!-- Main view -->
-            @RenderBody()
+                <!-- Main view -->
+                @RenderBody()
 
-            <!-- Footer -->
-            @Html.Partial("_Footer")
+                <!-- Footer -->
+                @Html.Partial("_Footer")
+
+            </div>
+            <!-- End page wrapper-->
 
         </div>
-        <!-- End page wrapper-->
+        <!-- End wrapper-->
 
-    </div>
-    <!-- End wrapper-->
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/plugins/metsiMenu")
-    @Scripts.Render("~/plugins/pace")
-    @Scripts.Render("~/plugins/slimScroll")
-    @Scripts.Render("~/bundles/inspinia")
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/plugins/metsiMenu")
+        @Scripts.Render("~/plugins/pace")
+        @Scripts.Render("~/plugins/slimScroll")
+        @Scripts.Render("~/bundles/inspinia")
+        @RenderSection("scripts", required: false)
     </body>
 }
 else
@@ -53,13 +53,13 @@ else
         <!-- Wrapper-->
         <div id="wrapper">
 
-                <!-- Main view  -->
-                @RenderBody()
+            <!-- Main view  -->
+            @RenderBody()
 
-                <!-- Footer -->
-                @Html.Partial("_Footer")
+            <!-- Footer -->
+            @Html.Partial("_Footer")
 
-         
+
             <!-- End page wrapper-->
 
         </div>

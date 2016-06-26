@@ -133,8 +133,8 @@ C:\Users\juanjo\Desktop\Nueva carpeta\C#\shanuMVCUserRoles\bin\Microsoft.Owin.Se
 C:\Users\juanjo\Desktop\Nueva carpeta\C#\shanuMVCUserRoles\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\juanjo\Desktop\Nueva carpeta\C#\shanuMVCUserRoles\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\juanjo\Desktop\Nueva carpeta\C#\shanuMVCUserRoles\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\juanjo\Desktop\Nueva carpeta\C#\shanuMVCUserRoles\obj\Debug\shanuMVCUserRoles.csprojResolveAssemblyReference.cache
 C:\Users\juanjo\Desktop\Nueva carpeta\C#\shanuMVCUserRoles\obj\Debug\shanuMVCUserRoles.dll
 C:\Users\juanjo\Desktop\Nueva carpeta\C#\shanuMVCUserRoles\obj\Debug\shanuMVCUserRoles.pdb
 C:\Users\juanjo\Desktop\Nueva carpeta\C#\shanuMVCUserRoles\obj\Debug\shanuMVCUserRoles.Migrations.initial.resources
 C:\Users\juanjo\Desktop\Nueva carpeta\C#\shanuMVCUserRoles\obj\Debug\shanuMVCUserRoles.csproj.GenerateResource.Cache
+C:\Users\juanjo\Desktop\Nueva carpeta\C#\shanuMVCUserRoles\obj\Debug\shanuMVCUserRoles.csprojResolveAssemblyReference.cache
