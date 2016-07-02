@@ -1,36 +1,27 @@
-﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
-@{
-    ViewBag.Title = "Add Role";
-}
-<table style=" background-color:#FFFFFF; border: dashed 3px #6D7B8D; padding: 5px;width: 99%;table-layout:fixed;" cellpadding="6" cellspacing="6">
-    <tr style="height: 30px; background-color:#336699 ; color:#FFFFFF ;border: solid 1px #659EC7;">
-        <td align="center" colspan="2">
-            <h2> Create User Roles</h2>
-        </td>
+﻿<section class="col-sm-6">
+    <table class="table-bordered">
+        @Html.ActionLink("Create Role","Create","Role");
+    </table>
+</section>
 
-    </tr>
+<section class="col-sm-6">
+    <table class="table-bordered">
+        @Html.ActionLink("Assign Role to User", "RegisterRole", "Account");
+    </table>
+</section>
 
+<br /> <br />
+
+<table class="table table-bordered table-hover">
     <tr>
-        <td>
-            <table id="tbrole" style="width:100%; border:dotted 1px; background-color:gainsboro; padding-left:10px;">
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td style="width:100%; border:dotted 1px;">
-                            @item.Name
-                        </td>
-                    </tr>}
-            </table>
-        </td>
-        <td align="right" style="color:#FFFFFF;padding-right:10;">
-
-
-            <h3>   @Html.ActionLink("Click to Create New Role", "Create", "Role") </h3>
-        </td>
+        <th class="c"> Role Name </th>
     </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="c">  @item.Name </td>
+        </tr>
+    }
+    
 </table>
-
-
-
 

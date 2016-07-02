@@ -54,9 +54,9 @@ namespace shanuMVCUserRoles
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1804073706491701",
+               appSecret: "10de0d3cf4183bd36084f8a57e298c6f");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

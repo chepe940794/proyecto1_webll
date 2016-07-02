@@ -166,11 +166,37 @@ namespace shanuMVCUserRoles.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-			ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
-											.ToList(), "Name", "Name");
-			return View();
+            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+                                            .ToList(), "Name", "Name");
+            return View();
         }
-
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public ActionResult RegisterRole()
+        {
+            ViewBag.Name = new SelectList(context.Roles.ToList(), "Name", "Name");
+            ViewBag.UserName = new SelectList(context.Users.ToList(), "UserName", "UserName");
+            return View();
+        }
+        [HttpPost]
+        //[AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> RegisterRole(RegisterViewModel model, ApplicationUser user)
+        {
+            var userId = context.Users.Where(i => i.UserName == user.UserName).Select(s => s.Id);
+            string updateId = "";
+            foreach (var i in userId)
+            {
+                updateId = i.ToString();
+            }
+            //if we need to remove old role to user no sirve xD
+            //string oldRole = await this.UserManager.GetRoles(userId.ToString()).IndexOf(1);
+            //await this.UserManager.RemoveFromRoleAsync(userId.ToString(), model.Name);
+            //Assign the new Role to user
+            await this.UserManager.AddToRoleAsync(updateId, model.UserName);
+            return RedirectToAction("Index", "Home");
+        }
         //
         // POST: /Account/Register
         [HttpPost]
@@ -468,7 +494,7 @@ namespace shanuMVCUserRoles.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //
