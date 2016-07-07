@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -184,7 +182,7 @@ namespace shanuMVCUserRoles.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> RegisterRole(RegisterViewModel model, ApplicationUser user)
         {
-            var userId = context.Users.Where(i => i.UserName == user.UserName).Select(s => s.Id);
+            var userId = context.Users.Where(i => i.UserName == user.UserName).Select(s => s.Id).ToList();
             string updateId = "";
             foreach (var i in userId)
             {
@@ -194,7 +192,7 @@ namespace shanuMVCUserRoles.Controllers
             //string oldRole = await this.UserManager.GetRoles(userId.ToString()).IndexOf(1);
             //await this.UserManager.RemoveFromRoleAsync(userId.ToString(), model.Name);
             //Assign the new Role to user
-            await this.UserManager.AddToRoleAsync(updateId, model.UserName);
+            await this.UserManager.AddToRoleAsync(updateId, model.UserRoles);//revisar problema aqui ! 
             return RedirectToAction("Index", "Home");
         }
         //
@@ -205,25 +203,6 @@ namespace shanuMVCUserRoles.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
 
-            //if (ModelState.IsValid)
-            //{
-            //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-            //var result = await UserManager.CreateAsync(user, model.Password);
-            //var message = new MailMessage();
-            //if (result.Succeeded)
-            //{
-            //    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-            //    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-            //    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-            //    message.Body = callbackUrl;
-            //    //message.To.Add(new MailAddress(model.Email));
-            //    message.Subject = "Confirm your account";
-            //    sendMail(message, model.Email);
-            //    ViewBag.Link = callbackUrl;
-            //    return View("DisplayEmail");
-                //    }
-                //    AddErrors(result);
-                //}
                 if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };

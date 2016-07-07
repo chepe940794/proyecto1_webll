@@ -11,7 +11,7 @@ namespace shanuMVCUserRoles.Models
         [Display(Name = "Teléfono: ")]
         public string Telefono { get; set; }
         [Display(Name = "Imagen: ")]
-        public string Imagen { get; set; }
+        public HttpPostedFileBase Imagen { get; set; }
         [Display(Name = "Nombre de la propiedad: ")]
         public string NombrePropiedad { get; set; }
         [Display(Name = "Descripción: ")]

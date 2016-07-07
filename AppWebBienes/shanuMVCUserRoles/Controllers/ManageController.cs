@@ -371,6 +371,10 @@ namespace shanuMVCUserRoles.Controllers
             return false;
         }
 
+        //private async Task<ApplicationUser> GetCurrentUserAsync()
+        //{
+        //    return await UserManager.FindByIdAsync(User.Identity.GetUserId());
+        //}
         public enum ManageMessageId
         {
             AddPhoneSuccess,

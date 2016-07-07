@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using Microsoft.AspNet.Identity;
 using shanuMVCUserRoles.Models;
 
@@ -36,7 +40,7 @@ namespace shanuMVCUserRoles.Controllers
             }
             return View(bienesModel);
         }
-
+        
         // GET: BienesModels/Create
         public ActionResult Create()
         {
@@ -47,6 +51,7 @@ namespace shanuMVCUserRoles.Controllers
         // POST: BienesModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(BienesViewModel viewModel)
@@ -55,6 +60,19 @@ namespace shanuMVCUserRoles.Controllers
             {
                 BienesModel model = new BienesModel();
                 model.Id = Guid.NewGuid();
+                if (HasFile(viewModel.Imagen))
+                {
+                    var filepath = HostingEnvironment.MapPath("~/Images/") + model.Id+ ".png";
+                    var directory = new DirectoryInfo(HostingEnvironment.MapPath("~/Images/"));
+                    if (directory.Exists == false)
+                    {
+                        directory.Create();
+                    }
+                    ViewBag.FilePath = filepath.ToString();
+                    viewModel.Imagen.SaveAs(filepath);
+                    model.Imagen = model.Id+".png";
+
+                }
                 model.Descripcion = viewModel.Descripcion;
                 model.NombrePropiedad = viewModel.NombrePropiedad;
                 model.Precio = viewModel.Precio;
@@ -67,6 +85,11 @@ namespace shanuMVCUserRoles.Controllers
             }
 
             return View(viewModel);
+        }
+
+        public static bool HasFile( HttpPostedFileBase file)
+        {
+            return file != null && file.ContentLength > 0;
         }
 
         // GET: BienesModels/Edit/5
@@ -126,6 +149,35 @@ namespace shanuMVCUserRoles.Controllers
             return RedirectToAction("Index");
         }
 
+
+        //public async Task<ActionResult> UploadPhoto(HttpPostedFileBase file)
+        //{
+        //    if (file != null && file.ContentLength > 0)
+        //    {
+        //        var user = await GetCurrentUserAsync();
+        //        var username = user.UserName;
+        //        var fileExt = Path.GetExtension(file.FileName);
+        //        var fnm = username + ".png";
+        //        if (fileExt.ToLower().EndsWith(".png") || fileExt.ToLower().EndsWith(".jpg") || fileExt.ToLower().EndsWith(".gif"))
+        //        {
+        //            var filepath = HostingEnvironment.MapPath("~/Content/images/profile/") + fnm;
+        //            var directory = new DirectoryInfo(HostingEnvironment.MapPath("~/Content/images/profile/"));
+        //            if (directory.Exists == false)
+        //            {
+        //                directory.Create();
+        //            }
+        //            ViewBag.FilePath = filepath.ToString();
+        //            file.SaveAs(filepath);
+        //            return RedirectToAction("Index", new { Message = ManageMessageId.PhotoUploadSuccess });
+        //        }
+        //        else
+        //        {
+        //            return RedirectToAction("Index", new { Message = ManageMessageId.FileExtensionError });
+        //        }
+        //    }
+        //    return RedirectToAction("Index", new { Message = ManageMessageId.Error });
+        //}
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -134,5 +186,25 @@ namespace shanuMVCUserRoles.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
+
+        //private async Task<ApplicationUser> GetCurrentUserAsync()
+        //{
+        //    return await UserManager.FindByIdAsync(User.Identity.GetUserId());
+        //}
+
+        //public enum ManageMessageId
+        //{
+        //    AddPhoneSuccess,
+        //    ChangePasswordSuccess,
+        //    SetTwoFactorSuccess,
+        //    SetPasswordSuccess,
+        //    RemoveLoginSuccess,
+        //    RemovePhoneSuccess,
+        //    Error,
+        //    PhotoUploadSuccess,
+        //    FileExtensionError
+        //}
     }
 }
