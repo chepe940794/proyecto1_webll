@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
-using System.Web.Services.Description;
 using Microsoft.AspNet.Identity;
 using shanuMVCUserRoles.Models;
 
@@ -52,6 +48,7 @@ namespace shanuMVCUserRoles.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(BienesViewModel viewModel)
@@ -78,6 +75,7 @@ namespace shanuMVCUserRoles.Controllers
                 model.Precio = viewModel.Precio;
                 model.Telefono = viewModel.Telefono;
                 model.Ubicacion = viewModel.Ubicacion;
+                model.Activo = true;
                 model.UserId = User.Identity.GetUserId();
                 db.BienesModels.Add(model);
                 db.SaveChanges();
@@ -149,35 +147,6 @@ namespace shanuMVCUserRoles.Controllers
             return RedirectToAction("Index");
         }
 
-
-        //public async Task<ActionResult> UploadPhoto(HttpPostedFileBase file)
-        //{
-        //    if (file != null && file.ContentLength > 0)
-        //    {
-        //        var user = await GetCurrentUserAsync();
-        //        var username = user.UserName;
-        //        var fileExt = Path.GetExtension(file.FileName);
-        //        var fnm = username + ".png";
-        //        if (fileExt.ToLower().EndsWith(".png") || fileExt.ToLower().EndsWith(".jpg") || fileExt.ToLower().EndsWith(".gif"))
-        //        {
-        //            var filepath = HostingEnvironment.MapPath("~/Content/images/profile/") + fnm;
-        //            var directory = new DirectoryInfo(HostingEnvironment.MapPath("~/Content/images/profile/"));
-        //            if (directory.Exists == false)
-        //            {
-        //                directory.Create();
-        //            }
-        //            ViewBag.FilePath = filepath.ToString();
-        //            file.SaveAs(filepath);
-        //            return RedirectToAction("Index", new { Message = ManageMessageId.PhotoUploadSuccess });
-        //        }
-        //        else
-        //        {
-        //            return RedirectToAction("Index", new { Message = ManageMessageId.FileExtensionError });
-        //        }
-        //    }
-        //    return RedirectToAction("Index", new { Message = ManageMessageId.Error });
-        //}
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -189,22 +158,6 @@ namespace shanuMVCUserRoles.Controllers
 
         
 
-        //private async Task<ApplicationUser> GetCurrentUserAsync()
-        //{
-        //    return await UserManager.FindByIdAsync(User.Identity.GetUserId());
-        //}
-
-        //public enum ManageMessageId
-        //{
-        //    AddPhoneSuccess,
-        //    ChangePasswordSuccess,
-        //    SetTwoFactorSuccess,
-        //    SetPasswordSuccess,
-        //    RemoveLoginSuccess,
-        //    RemovePhoneSuccess,
-        //    Error,
-        //    PhotoUploadSuccess,
-        //    FileExtensionError
-        //}
+      
     }
 }

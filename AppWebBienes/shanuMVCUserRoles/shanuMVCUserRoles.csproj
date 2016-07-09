@@ -181,6 +181,10 @@
     <Compile Include="Migrations\201606282259046_initial.Designer.cs">
       <DependentUpon>201606282259046_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607090041087_second.cs" />
+    <Compile Include="Migrations\201607090041087_second.Designer.cs">
+      <DependentUpon>201607090041087_second.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BienesModel.cs" />
@@ -220,6 +224,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\home.png" />
     <Content Include="Images\login1.png" />
+    <Content Include="Images\logo empresa.png" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\registro.png" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
@@ -343,6 +349,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606282259046_initial.resx">
       <DependentUpon>201606282259046_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607090041087_second.resx">
+      <DependentUpon>201607090041087_second.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -9,33 +9,13 @@
 
 <div>
     <h4>BienesModel</h4>
-    <hr/>
+    <hr />
 
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UserId)
+            <img src="../../Images/@Model.Imagen" width="15%">
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Imagen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Imagen)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.NombrePropiedad)
         </dt>
@@ -59,7 +39,13 @@
         <dd>
             @Html.DisplayFor(model => model.Ubicacion)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Precio)
         </dt>

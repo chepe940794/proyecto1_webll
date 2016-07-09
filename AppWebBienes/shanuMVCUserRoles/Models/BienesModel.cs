@@ -24,5 +24,8 @@ namespace shanuMVCUserRoles.Models
         public string Ubicacion { get; set; }
         [Display(Name = "Precio: ")]
         public decimal Precio { get; set; }
+
+        public bool Activo { get; set; }
+
     }
 }

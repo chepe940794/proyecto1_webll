@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using System.Web.Security;
 
 namespace shanuMVCUserRoles.Models
 {
@@ -64,7 +66,11 @@ namespace shanuMVCUserRoles.Models
 
     public class RegisterViewModel
     {
-		[Required]
+        public SelectList  Roles { get; set; }
+
+        public string RolName { get; set; }
+
+            [Required]
 		[Display(Name = "UserRoles")]
 		public string UserRoles { get; set; }
 
@@ -85,7 +91,7 @@ namespace shanuMVCUserRoles.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -104,7 +110,7 @@ namespace shanuMVCUserRoles.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

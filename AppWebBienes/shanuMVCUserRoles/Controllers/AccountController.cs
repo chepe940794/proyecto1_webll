@@ -4,14 +4,16 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using shanuMVCUserRoles.Models;
 
 namespace shanuMVCUserRoles.Controllers
 {
-    [Authorize]
+   
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -173,8 +175,10 @@ namespace shanuMVCUserRoles.Controllers
         public ActionResult RegisterRole()
         {
             ViewBag.Name = new SelectList(context.Roles.ToList(), "Name", "Name");
+            RegisterViewModel viewModel = new RegisterViewModel();
+            viewModel.Roles = new SelectList(context.Roles.ToList(), "Name", "Name");
             ViewBag.UserName = new SelectList(context.Users.ToList(), "UserName", "UserName");
-            return View();
+            return View(viewModel);
         }
         [HttpPost]
         //[AllowAnonymous]
@@ -182,6 +186,7 @@ namespace shanuMVCUserRoles.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> RegisterRole(RegisterViewModel model, ApplicationUser user)
         {
+           
             var userId = context.Users.Where(i => i.UserName == user.UserName).Select(s => s.Id).ToList();
             string updateId = "";
             foreach (var i in userId)
@@ -192,7 +197,7 @@ namespace shanuMVCUserRoles.Controllers
             //string oldRole = await this.UserManager.GetRoles(userId.ToString()).IndexOf(1);
             //await this.UserManager.RemoveFromRoleAsync(userId.ToString(), model.Name);
             //Assign the new Role to user
-            await this.UserManager.AddToRoleAsync(updateId, model.UserRoles);//revisar problema aqui ! 
+            await this.UserManager.AddToRoleAsync(updateId, model.RolName);//revisar problema aqui ! 
             return RedirectToAction("Index", "Home");
         }
         //

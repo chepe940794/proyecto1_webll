@@ -209,3 +209,4 @@ C:\Users\juanjo\Desktop\proyecto web 2\C#\shanuMVCUserRoles\obj\Debug\shanuMVCUs
 C:\Users\juanjo\Desktop\proyecto web 2\C#\shanuMVCUserRoles\obj\Debug\shanuMVCUserRoles.Migrations.initial.resources
 C:\Users\juanjo\Desktop\proyecto web 2\C#\shanuMVCUserRoles\obj\Debug\shanuMVCUserRoles.csproj.GenerateResource.Cache
 C:\Users\juanjo\Desktop\proyecto web 2\C#\shanuMVCUserRoles\obj\Debug\shanuMVCUserRoles.csprojResolveAssemblyReference.cache
+C:\Users\juanjo\Desktop\proyecto web 2\C#\shanuMVCUserRoles\obj\Debug\shanuMVCUserRoles.Migrations.second.resources
