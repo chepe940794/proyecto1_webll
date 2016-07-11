@@ -12,7 +12,7 @@
     <h4>BienesModel</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.UserId)
         </dt>
 
@@ -66,8 +66,47 @@
 
         <dd>
             @Html.DisplayFor(model => model.Precio)
+        </dd>*@
+        <dd>
+            <img src="../../Images/@Model.Imagen" width="15%">
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombrePropiedad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombrePropiedad)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ubicacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ubicacion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {

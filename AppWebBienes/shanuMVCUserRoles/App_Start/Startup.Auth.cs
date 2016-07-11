@@ -54,15 +54,15 @@ namespace shanuMVCUserRoles
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-               appId: "1804073706491701",
-               appSecret: "10de0d3cf4183bd36084f8a57e298c6f");
+            //app.UseFacebookAuthentication(
+            //   appId: "1804073706491701",
+            //   appSecret: "10de0d3cf4183bd36084f8a57e298c6f");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "702465930053-6tf1akjijp2ottt6pj0em28j829q2no3.apps.googleusercontent.com",
+                ClientSecret = "-C4b5hGx6-Zg3pkX8fBBBQch"
+            });
         }
     }
 }

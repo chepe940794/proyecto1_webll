@@ -23,15 +23,15 @@ namespace shanuMVCUserRoles.Controllers
 				ApplicationDbContext context = new ApplicationDbContext();
 				var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 				var s = UserManager.GetRoles(user.GetUserId());
-				if (s[0].ToString() == "Admin")
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
+                if (s[0].ToString() == "Admin" )
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
 			return false;
 		}
 		public ActionResult Index()

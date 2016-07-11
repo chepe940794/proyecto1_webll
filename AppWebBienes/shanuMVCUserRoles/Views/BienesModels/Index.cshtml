@@ -4,6 +4,13 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="../../Content/switchery.css" rel="stylesheet">
+<script src="../../Scripts/plugins/switchery/switchery.js"></script>
+<script src="../../Scripts/jquery-2.1.1.js"></script>
+<script src="../../Scripts/bootstrap.min.js"></script>
+<script src="../../Scripts/app/inspinia.js"></script>
+<script src="../../Scripts/plugins/pace/pace.min.js"></script>
+<script src="../../Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <br />
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -29,14 +36,10 @@
             </th>
 
             <th style="text-align: center">
-                @Html.DisplayNameFor(model => model.Descripcion)
+                Estado
             </th>
 
-            <th style="text-align: center">
-                @Html.DisplayNameFor(model => model.Ubicacion)
-            </th>
-
-            <th style="text-align: center">
+          <th style="text-align: center">
                 @Html.DisplayNameFor(model => model.Telefono)
             </th>
 
@@ -61,18 +64,22 @@
                         <img src="../../Images/home.png" style="width: 30%;" />
                     }
 
-                    @*@Html.DisplayFor(modelItem => item.Imagen)*@
                 </td>
                 <td style="text-align: center">
                     @Html.DisplayFor(modelItem => item.NombrePropiedad)
                 </td>
 
-                <td style="text-align: center">
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
 
                 <td style="text-align: center">
-                    @Html.DisplayFor(modelItem => item.Ubicacion)
+                    @if (item.Activo)
+                    {
+                        <span class="label label-primary">Activo</span>
+                    }
+                    else
+                    {
+                        <span class="label label-danger">Desactivado</span>
+                    }
+
                 </td>
 
                 <td style="text-align: center">
@@ -83,12 +90,34 @@
                     @Html.DisplayFor(modelItem => item.Precio)
                 </td>
                 <td>
-                    <a class="btn btn-success btn-xs" title="Editar Propiedad" href="@Url.Action("Edit", "BienesModels",new {id=item.Id})"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    <a class="btn btn-success btn-xs" title="Editar Propiedad" href="@Url.Action("Edit", "BienesModels", new {id = item.Id})"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                    <a class="btn btn-success btn-xs" title="Detalles Propiedad" href="@Url.Action("Details", "BienesModels", new {id = item.Id})"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a>
+                    <a class="btn btn-success btn-xs" title="Eliminar Propiedad" href="@Url.Action("Delete", "BienesModels", new {id = item.Id})"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    <a class="btn btn-success btn-xs" title="Cambiar de Estado" href="@Url.Action("ChangeStatus", "BienesModels", new {id = item.Id})"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>
+                   
                 </td>
             </tr>
         }
 
     </table>
 </div>
+@*<script>
+        //$(function () {
+        //    enable_cb();
+        //    $("#js-switch").click(enable_cb);
+        //});
+
+        //function enable_cb() {
+        //    if (this.checked) {
+        //        $("input.js-switch").removeAttr("disabled");
+        //    } else {
+        //        $("input.js-switch").attr("disabled", true);
+        //    }
+        //}
+        $("input.js-switch").prop("disabled", true);
+        $("input.js-switch").prop("disabled", false);
+    </script>
+    <script>
+        var elem = document.querySelector('.js-switch');
+        var switchery = new Switchery(elem, { color: '#1AB394' });
+    </script>*@

@@ -147,6 +147,20 @@ namespace shanuMVCUserRoles.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: BienesModels/Delete/5
+        public ActionResult ChangeStatus(Guid id)
+        {
+            BienesModel bienesModel = db.BienesModels.Find(id);
+            if (bienesModel.Activo)
+                bienesModel.Activo = false;
+            else
+                bienesModel.Activo = true;
+
+            db.Entry(bienesModel);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

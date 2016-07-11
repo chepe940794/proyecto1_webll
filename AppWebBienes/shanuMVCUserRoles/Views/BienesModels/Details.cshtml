@@ -3,60 +3,85 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    @*<meta property="fb:admins" content="juanjo0794" />*@
+
+
+    HttpContext context = HttpContext.Current;
+    string baseUrl = context.Request.Url.AbsoluteUri;
+
+
+
+
 }
+<html>
+<head>
 
-<h2>Details</h2>
+    <meta property="fb:app_id" content="1804073706491701" />
+</head>
+<body>
+    <h2>Details</h2>
 
-<div>
-    <h4>BienesModel</h4>
-    <hr />
+    <div>
+        <h4>BienesModel</h4>
+        <hr />
 
-    <dl class="dl-horizontal">
+        <dl class="dl-horizontal">
 
-        <dd>
-            <img src="../../Images/@Model.Imagen" width="15%">
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NombrePropiedad)
-        </dt>
+            <dd>
+                <img src="../../Images/@Model.Imagen" width="15%">
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NombrePropiedad)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NombrePropiedad)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.NombrePropiedad)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ubicacion)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Ubicacion)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ubicacion)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ubicacion)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Telefono)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Precio)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Precio)
+            </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        </dl>
+    </div>
+    
+
+    <div id="fb-root">
+        <div class="fb-comments" data-href="@baseUrl" data-numposts="5"></div>
+    </div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.6&appId=1804073706491701";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+</body>
+</html>

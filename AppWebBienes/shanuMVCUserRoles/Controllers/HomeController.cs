@@ -7,7 +7,7 @@ using shanuMVCUserRoles.Models;
 
 namespace shanuMVCUserRoles.Controllers
 {
-
+    [RequireHttps]
     public class HomeController : Controller
 	{
         private ApplicationDbContext db = new ApplicationDbContext();

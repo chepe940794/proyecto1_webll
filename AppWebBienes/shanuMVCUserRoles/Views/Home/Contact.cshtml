@@ -1,17 +1,87 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿
+@{
+    var eMailSent = false;
+    if (IsPost)
+    {
+        eMailSent = true;
+
+        var eMailSubject = Request["subject"];
+        if (eMailSubject == null)
+        {
+           
+            eMailSubject = "Anonimo";
+        }
+        var eMailMessage = Request["message"];
+        if (eMailMessage == null)
+        {
+            eMailMessage = "Mensaje vacío";
+        }
+
+        WebMail.SmtpServer = "smtp.gmail.com";
+        WebMail.SmtpPort = 587;
+        WebMail.EnableSsl = true;
+        WebMail.UserName = "jnvargasb07@gmail.com";
+        WebMail.From = eMailSubject;
+        WebMail.Password = "qweasd0794";
+        WebMail.Send(to: "jnvargasb07@gmail.com", subject: eMailSubject, body: eMailMessage);
+
+    }
+
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<style>
+    #map {
+        width: 100%;
+        height: 400px;
+    }
+</style>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+@*<meta http-equiv="refresh" content="30">*@
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+@{
+    ViewBag.Title = "Contact";
+
+}
+<div id="map"></div>
+<script>
+    function initMap() {
+        var mapDiv = document.getElementById('map');
+        var map = new google.maps.Map(mapDiv, {
+            center: { lat: 10.322789, lng: -84.429630 },
+            zoom: 15
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhwV1cnaxoK469DCUiwP_C44K3wTaOBvc&callback=initMap">
+</script>
+<hgroup>
+
+    <h3>User support</h3>
+</hgroup>
+<div>
+    <address>
+        j&amp;A Bienes Raices<br />
+        Ubicación oficinas: Ciudad Quesada, costado norte de la catedral de Ciudad Quesada.<br />
+        Horario de atención: Lunes a sabados de 8:00 am - 5:00 pm<br />
+        <abbr title="Phone">Phone:</abbr>
+        +506 8888 8888
+    </address>
+
+    <address>
+        <i class="icon-envelope"></i><strong>Support:</strong> <a href="mailto:jnvargasb07@gmail.com">jnvargasb07@gmail.com</a><br />
+        <i class="icon-envelope"></i><strong>Support:</strong> <a href="mailto:chepe0794@hotmail.com">chepe0794@hotmail.com</a><br /><br />
+        <strong>
+            Contact Us:
+        </strong>
+        <form method="POST" id="usrform">
+            Digite su email:<br>
+            <input type="text" name="subject" class="form-control input-sm" id="subject" style="width: 50%"  pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+&#64[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required="">
+            <br><br>
+            <textarea rows="4" cols="50" name="message" id="message" class="form-control" form="usrform" placeholder="Message" style="width: 50%" required=""></textarea><br><br>
+            <input type="submit" value="Enviar" class="btn btn-primary">
+        </form><br /><br />
+
+    </address>
+
+</div>
+
