@@ -454,7 +454,9 @@ namespace shanuMVCUserRoles.Controllers
                     return View("ExternalLoginFailure");
                 }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user);
+               var result = await UserManager.CreateAsync(user);
+                var rol = context.Roles.Where(u => u.Name.Contains("User")).ToList().FirstOrDefault();
+                await UserManager.AddToRoleAsync(user.Id, rol.Name);
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
